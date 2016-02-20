@@ -2,9 +2,19 @@ package Assignment3;
 
 public class Item 
 {
-//Declare variables for this class. Think about its type: public, protected or private?
 
-// You will need a constructor (Why?). Create it here.
+	protected String name;
+	protected double price;
+	protected int quantity;
+	protected double weight;
+	
+	public Item(String name, double price, int quantity, double weight)
+	{
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.weight = weight;
+	}
 	
 	float calculatePrice () 
 	{

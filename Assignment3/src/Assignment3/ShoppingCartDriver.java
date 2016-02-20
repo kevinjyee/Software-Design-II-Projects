@@ -24,7 +24,8 @@ public class ShoppingCartDriver
 	public static void processLinesInFile (String filename) 
 	{ 
 
-		Translator translator = new Translator(); 
+		
+		ShoppingCartDriver driver = new ShoppingCartDriver();
 		try 
 		{
 			FileReader freader = new FileReader(filename);
@@ -32,8 +33,8 @@ public class ShoppingCartDriver
 			
 			for (String s = reader.readLine(); s != null; s = reader.readLine()) 
 			{
-				String pigLatin = translator.translate(s);
-				System.out.println(pigLatin);
+				String output = driver.processCommands(s);
+				
 			}
 		} 
 		catch (FileNotFoundException e) 
@@ -47,12 +48,18 @@ public class ShoppingCartDriver
 			e.printStackTrace();
 			System.exit(-1);
 		}
+		return;
 	}
 	  public static void main(String[] args) 
 	  {
 		// TODO Auto-generated method stub
 		
-		//Open file; file name specified in args (command line)
+		  if (args.length != 1) 
+			{
+				System.err.println ("Error: Incorrect number of command line arguments");
+				System.exit(-1);
+			}
+		  processLinesInFile (args[0]);
 		
 		//Parse input, take appropriate actions.
 		
@@ -72,4 +79,9 @@ public class ShoppingCartDriver
 		}		
 	  }
 
+	 public static String processCommands(String input){
+		  
+		 
+		 return "";
+	  }
 }
