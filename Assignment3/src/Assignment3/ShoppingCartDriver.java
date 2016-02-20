@@ -50,9 +50,11 @@ public class ShoppingCartDriver
 		}
 		return;
 	}
+	
+	
 	  public static void main(String[] args) 
 	  {
-		// TODO Auto-generated method stub
+		
 		
 		  if (args.length != 1) 
 			{
@@ -75,13 +77,62 @@ public class ShoppingCartDriver
 			temp.printItemAttributes();
 			//This (above) works because of polymorphism: a determination is made at runtime, 
 			//based on the inherited class type, as to which method is to be invoked. Eg: If it is an instance
-			// of Grocery, it will invoke the calculatePrice () method defined in Grocery.
+			// of Grocery, it will invoke 
+			//the calculatePrice () method defined in Grocery.
 		}		
 	  }
 
 	 public static String processCommands(String input){
 		  
+		 String commands[] = input.split("\\s+");
+		 if(commands.length > 8){System.out.println("Invalid Number of Arguments");}
+		 
+		 if (commands[0].equals("insert")) {
+				return "";
+			} else if (commands[0].equals("search")) {
+				return "";
+			} else if (commands[0].equals("delete")) {
+				return "";
+			} else if (commands[0].equals("update")) {
+				return "";
+			} else if (commands[0].equals("print")) {
+				return "";
+			} else {
+				System.out.println("Invalid Argument");
+				return "";
+			}
+		 
+	  }
+	 
+	 public static String processInsert(String[] input)
+	 {
+		 
 		 
 		 return "";
-	  }
+	 }
+	 
+	 public static String processSearch(String[] input)
+	 {
+		 
+		 
+		 return "";
+	 }
+	 
+	 public static String processDelete(String[] input)
+	 {
+	 
+	 
+		 return "";
+	 }
+ 
+public static String processUpdate(String[] input)
+	{ 
+	 	return "";
+	}
+
+public static String processPrint(String[] input)
+	{
+		return "";
+	}
+
 }
