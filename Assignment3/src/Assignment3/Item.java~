@@ -8,8 +8,6 @@ public class Item
 	protected int quantity;
 	protected double weight;
 	
-	
-	
 	public Item(String name, double price, int quantity, double weight)
 	{
 		this.name = name;
@@ -32,4 +30,3 @@ public class Item
 	}
 
 }
-
