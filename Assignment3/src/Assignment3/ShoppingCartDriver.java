@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 public class ShoppingCartDriver 
 	{
 
@@ -53,7 +54,12 @@ public class ShoppingCartDriver
 	
 	
 	  public static ArrayList<Item> shoppingCart = new ArrayList<Item>(); 
-	
+	  
+	 public static String[] STATES = new String[] {"al", "ak", "as", "az", "ar", "ca", "co", "ct", "de", "dc", "fm", "fl", "ga", "gu", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "mh", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "mp", "oh", "ok", "or", "pw", "pa", "pr", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "vi", "va", "wa", "wv", "wi", "wy"};
+	 public static String[] EXSTATES = new String[] {"tx","nm","va","az","ak"};
+	 public static ArrayList<String > ALL_STATES = new ArrayList(Arrays.asList(STATES));
+	 public static ArrayList<String> EXCEPTION_STATES = new ArrayList(Arrays.asList(EXSTATES));
+	  
 	  public static void main(String[] args) 
 	  {
 		
@@ -75,7 +81,7 @@ public class ShoppingCartDriver
 		while (i.hasNext()) 
 		{
 			Item temp = i.next();
-			temp.calculatePrice(); 
+			temp.calculatePrice();
 			temp.printItemAttributes();
 			//This (above) works because of polymorphism: a determination is made at runtime, 
 			//based on the inherited class type, as to which method is to be invoked. Eg: If it is an instance
@@ -86,7 +92,7 @@ public class ShoppingCartDriver
 
 	 public static String processCommands(String input){
 		  
-		 String commands[] = input.split("\\s+");
+		 String commands[] = input.toLowerCase().split("\\s+");
 		 if(commands.length > 8){System.out.println("Invalid Number of Arguments");}
 		 
 		 if (commands[0].equals("insert")) {
@@ -112,14 +118,14 @@ public class ShoppingCartDriver
 			 System.out.println("Invalid Input");
 			 return "";
 		 }
-		
+		 
 		 String type = input[1];
 		 String name = input[2];
 		 double price = Double.parseDouble(input[3]);
 		 int quantity = Integer.parseInt(input[4]);
-		 double weight = Double.parseDouble(input[5]);
+		 int weight = Integer.parseInt(input[5]);
 		 
-		 if(type.toLowerCase().equals("groceries"))
+		 if(type.equals("groceries"))
 		 {
 			 if(input.length != 7){
 				 System.out.println("Invalid Input");
@@ -128,11 +134,11 @@ public class ShoppingCartDriver
 			 
 			 boolean perishable;
 			
-			 if(input[6].toLowerCase().equals("p"))
+			 if(input[6].equals("p"))
 			 {
 				 perishable = true;
 			 }
-			 else if(input[6].toLowerCase().equals("np"))
+			 else if(input[6].equals("np"))
 			 {
 				 perishable = false;
 			 }
@@ -165,16 +171,17 @@ public class ShoppingCartDriver
 				 return "";
 			 }
 			 
-			 //TODO check if fragile and input is actually a state
+			
 			 
 			 String breakable = input[6];
 			 String state = input[7];
 			 boolean fragile;
 			 
-			 if(breakable.toLowerCase().equals("f")){
+			 
+			 if(breakable.equals("f")){
 				 fragile = true;
 			 }
-			 else if(breakable.toLowerCase().equals("nf"))
+			 else if(breakable.equals("nf"))
 			 {
 				 fragile = false;
 			 }
@@ -182,13 +189,35 @@ public class ShoppingCartDriver
 				 System.out.println("Invalid Input");
 				 return "";
 			 }
+			 
+			 if(!ALL_STATES.contains(state)){
+				 System.out.println("Invalid Input");
+				 return "";
+			 }
+			 
+			 Electronics newElectronics = new Electronics(name, price, quantity,weight,fragile,state);
+			 shoppingCart.add(newElectronics); 
+					 
 		 }
 		 return "";
 	 }
 	 
 	 public static String processSearch(String[] input)
 	 {
+		 if(input.length != 2){
+			 System.out.println("Invalid Input");
+			 return "";
+		 }
+		 String name = input[1];
 		 
+		 int index = findName(name);
+		 
+		 if(index != 1){
+			 System.out.println(String.format("Updated quantity of %s to %d", name, shoppingCart[index].getQuantity()););
+		 }
+		 else{
+			 System.out.println("Item Not Found");
+		 }
 		 
 		 return "";
 	 }
@@ -196,19 +225,70 @@ public class ShoppingCartDriver
 	 public static String processDelete(String[] input)
 	 {
 	 
-	 
+		 if(input.length != 2){
+			 System.out.println("Invalid Input");
+			 return "";
+		 }
+		 String name = input[1];
+		 
+		 int index = findName(name);
+		 
+		 if(index != 1){
+			 System.out.println(String.format("Deleted quantity of %s to %d", name, shoppingCart.get(index).getQuantity()););
+			 shoppingCart.remove(index);
+		 }
+		 else{
+			 System.out.println("Item Not Found");
+		 }
+		 
 		 return "";
 	 }
  
 	 public static String processUpdate(String[] input)
 	 { 
-	 	return "";
+		 if(input.length != 3){
+			 System.out.println("Invalid Input");
+			 return "";
+		 }
+		 String name = input[1];
+		 int quantity = Integer.parseInt(input[2]);
+		 
+		 int index = findName(name);
+		 
+		 if(index != 1){
+			 shoppingCart.get(index).setQuantity(quantity);
+		 }
+		 else{
+			 System.out.println("Item Not Found");
+		 }
+		 
+		 return "";
 	 }
 
 	 public static String processPrint(String[] input)
 	 {
 		return "";
 	 }
+	 
+	 public static int findName(String name){
+		 int ind = -1;
+		 for(ind = 0; ind < shoppingCart.size(); ind++){
+			 if(shoppingCart.get(ind).getName() == name){
+				 break; 
+			 }
+		 }
+	 }
 
-}
+	
+	}
+
+Collections.sort(shoppingCart, new Comparator<String>() {
+   
+    @Override
+    public int compareTo(Item other) {
+        
+        return  this.getName().compareTo(other.getName());
+    }
+});
+
 
