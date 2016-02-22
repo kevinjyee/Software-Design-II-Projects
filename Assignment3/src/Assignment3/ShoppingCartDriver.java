@@ -127,7 +127,7 @@ public class ShoppingCartDriver
 		 
 		 if(type.equals("groceries"))
 		 {
-			 if(input.length != 6){
+			 if(input.length != 7){
 				 System.out.println("Invalid Input");
 				 return "";
 			 }
@@ -288,5 +288,6 @@ public class ShoppingCartDriver
 
 	
 	
+
 
 
