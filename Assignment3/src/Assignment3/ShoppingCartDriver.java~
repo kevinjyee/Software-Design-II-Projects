@@ -52,8 +52,6 @@ public class ShoppingCartDriver
 	}
 	
 	
-	  public static ArrayList<Item> shoppingCart = new ArrayList<Item>(); 
-	
 	  public static void main(String[] args) 
 	  {
 		
@@ -68,7 +66,7 @@ public class ShoppingCartDriver
 		//Parse input, take appropriate actions.
 		
 		//Stub for arraylist.
-		
+		ArrayList<Item> shoppingCart = new ArrayList<Item>(); 
 		
 		// General code example for how to iterate an array list. You will have to modify this heavily, to suit your needs.
 		Iterator<Item> i = shoppingCart.iterator();
@@ -108,81 +106,8 @@ public class ShoppingCartDriver
 	 
 	 public static String processInsert(String[] input)
 	 {
-		 if(input.length > 8){
-			 System.out.println("Invalid Input");
-			 return "";
-		 }
-		
-		 String type = input[1];
-		 String name = input[2];
-		 double price = Double.parseDouble(input[3]);
-		 int quantity = Integer.parseInt(input[4]);
-		 double weight = Double.parseDouble(input[5]);
-		 
-		 if(type.toLowerCase().equals("groceries"))
-		 {
-			 if(input.length != 7){
-				 System.out.println("Invalid Input");
-				 return "";
-			 }
-			 
-			 boolean perishable;
-			
-			 if(input[6].toLowerCase().equals("p"))
-			 {
-				 perishable = true;
-			 }
-			 else if(input[6].toLowerCase().equals("np"))
-			 {
-				 perishable = false;
-			 }
-			 else
-			 {
-				 System.out.println("Invalid Input");
-				 return "";
-			 }
-			 Grocery newGrocery = new Grocery(name, price, quantity,weight,perishable);
-			 shoppingCart.add(newGrocery);
-		 }
-		 
-		 if(type.toLowerCase().equals("clothings"))
-		 {
-			 if(input.length != 6){
-				 System.out.println("Invalid Input");
-				 return "";
-			 }
-			 
-			 Clothing newClothing = new Clothing(name, price, quantity,weight);
-			 shoppingCart.add(newClothing);
-		 } 
 		 
 		 
-		 if(type.toLowerCase().equals("electronics"))
-		 {
-			 if(input.length != 8)
-			 {
-				 System.out.println("Invalid Input");
-				 return "";
-			 }
-			 
-			 //TODO check if fragile and input is actually a state
-			 
-			 String breakable = input[6];
-			 String state = input[7];
-			 boolean fragile;
-			 
-			 if(breakable.toLowerCase().equals("f")){
-				 fragile = true;
-			 }
-			 else if(breakable.toLowerCase().equals("nf"))
-			 {
-				 fragile = false;
-			 }
-			 else{
-				 System.out.println("Invalid Input");
-				 return "";
-			 }
-		 }
 		 return "";
 	 }
 	 
@@ -200,15 +125,14 @@ public class ShoppingCartDriver
 		 return "";
 	 }
  
-	 public static String processUpdate(String[] input)
-	 { 
+public static String processUpdate(String[] input)
+	{ 
 	 	return "";
-	 }
+	}
 
-	 public static String processPrint(String[] input)
-	 {
+public static String processPrint(String[] input)
+	{
 		return "";
-	 }
+	}
 
 }
-
