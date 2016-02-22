@@ -1,5 +1,7 @@
 package Assignment3;
 
+
+
 public class Clothing extends Item 
 {   
 	// variables, constructors as necessary
@@ -8,4 +10,5 @@ public class Clothing extends Item
 		super(name, price, quantity, weight);
 	}
 	
+
 }

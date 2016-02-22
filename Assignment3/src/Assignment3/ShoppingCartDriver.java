@@ -96,20 +96,20 @@ public class ShoppingCartDriver
 		 if(commands.length > 8){System.out.println("Invalid Number of Arguments");}
 		 
 		 if (commands[0].equals("insert")) {
-				return "";
+				processInsert(commands);
 			} else if (commands[0].equals("search")) {
-				return "";
+				processSearch(commands);
 			} else if (commands[0].equals("delete")) {
-				return "";
+				processDelete(commands);
 			} else if (commands[0].equals("update")) {
-				return "";
+				processUpdate(commands);
 			} else if (commands[0].equals("print")) {
-				return "";
+				processPrint(commands);
 			} else {
 				System.out.println("Invalid Argument");
-				return "";
+				
 			}
-		 
+		 return "";
 	  }
 	 
 	 public static String processInsert(String[] input)
@@ -127,7 +127,7 @@ public class ShoppingCartDriver
 		 
 		 if(type.equals("groceries"))
 		 {
-			 if(input.length != 7){
+			 if(input.length != 6){
 				 System.out.println("Invalid Input");
 				 return "";
 			 }
@@ -213,7 +213,7 @@ public class ShoppingCartDriver
 		 int index = findName(name);
 		 
 		 if(index != 1){
-			 System.out.println(String.format("Updated quantity of %s to %d", name, shoppingCart[index].getQuantity()););
+			 System.out.println(String.format("Updated quantity of %s to %d", name, shoppingCart.get(index).getQuantity()));
 		 }
 		 else{
 			 System.out.println("Item Not Found");
@@ -234,7 +234,7 @@ public class ShoppingCartDriver
 		 int index = findName(name);
 		 
 		 if(index != 1){
-			 System.out.println(String.format("Deleted quantity of %s to %d", name, shoppingCart.get(index).getQuantity()););
+			 System.out.println(String.format("Deleted quantity of %s to %d", name, shoppingCart.get(index).getQuantity()));
 			 shoppingCart.remove(index);
 		 }
 		 else{
@@ -274,21 +274,19 @@ public class ShoppingCartDriver
 		 int ind = -1;
 		 for(ind = 0; ind < shoppingCart.size(); ind++){
 			 if(shoppingCart.get(ind).getName() == name){
-				 break; 
+				 
+				break;
 			 }
 		 }
-	 }
-
-	
+		 
+	 
+	 return ind;
+	}
+	 
 	}
 
-Collections.sort(shoppingCart, new Comparator<String>() {
-   
-    @Override
-    public int compareTo(Item other) {
-        
-        return  this.getName().compareTo(other.getName());
-    }
-});
+
+	
+	
 
 

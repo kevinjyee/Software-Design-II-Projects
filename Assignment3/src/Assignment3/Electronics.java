@@ -1,10 +1,20 @@
 package Assignment3;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Electronics extends Item 
 {
+	
+	 public static String[] STATES = new String[] {"al", "ak", "as", "az", "ar", "ca", "co", "ct", "de", "dc", "fm", "fl", "ga", "gu", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "mh", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "mp", "oh", "ok", "or", "pw", "pa", "pr", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "vi", "va", "wa", "wv", "wi", "wy"};
+	 public static String[] EXSTATES = new String[] {"tx","nm","va","az","ak"};
+	 public static ArrayList<String > ALL_STATES = new ArrayList(Arrays.asList(STATES));
+	 public static ArrayList<String> EXCEPTION_STATES = new ArrayList(Arrays.asList(EXSTATES));
+	 
+	 
     protected boolean fragile; 
-    
-	public Electronics(String name, double price, int quantity, int weight, boolean fragile)
+    protected String state;
+	public Electronics(String name, double price, int quantity, int weight, boolean fragile, String state)
 	{
 		super(name, price, quantity, weight);
 	    this.fragile = fragile;
@@ -13,7 +23,12 @@ public class Electronics extends Item
     double calculatePrice () 
 	{
 		// Sales Tax
-        double tax_cost = this.price * (.1); // 10% tax
+        double tax_cost;
+        if(EXCEPTION_STATES.contains(state)){
+            tax_cost = 0;
+        } else{
+            tax_cost = this.price * (.1); // 10% tax
+        }
                 
         // Shipping cost 
         double shipping_cost = (20*(this.weight)); 
@@ -36,8 +51,9 @@ public class Electronics extends Item
         String output_quantity = "Quantity: " + this.quantity + "\n";;
         String output_weight = "Weight: " + (this.weight*this.quantity) + "\n";
         String output_shipping = "Shipping: "; 
-        if(fragile) output_shipping += ("Fragile" + "\n");
-        else output_shipping += ("Non-fragile" + "\n");
+        if(fragile) output_shipping += ("Fragile");
+        else output_shipping += ("Non-fragile");
+        output_name += " (" + state + ")\n";
         
 		//Print all applicable attributes of this class
         System.out.println(output_name + output_price + output_quantity + output_weight + output_shipping);

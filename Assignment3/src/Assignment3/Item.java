@@ -1,6 +1,6 @@
 package Assignment3;
 
-public class Item 
+public class Item implements Comparable<Item>
 {
 
 	protected String name;
@@ -8,13 +8,12 @@ public class Item
 	protected int quantity;
 	protected int weight;
 	
-<<<<<<< HEAD
+
 	
 	
-	public Item(String name, double price, int quantity, double weight)
-=======
+
     public Item(String name, double price, int quantity, int weight)
->>>>>>> 4f7b78972c6027e4e1d0e2c86ee81e519527ad00
+
 	{
 		this.name = name;
 		this.price = price;
@@ -82,5 +81,8 @@ public class Item
         this.weight = weight;
     }
 
+    public int compareTo(Item other) {
+        return this.getName().compareToIgnoreCase(other.getName());
+}
 }
 
