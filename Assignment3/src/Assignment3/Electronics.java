@@ -4,7 +4,7 @@ public class Electronics extends Item
 {
     protected boolean fragile; 
     
-	public Electronics(String name, double price, int quantity, int weight, boolean fragile)
+	public Electronics(String name, double price, int quantity, int weight, boolean fragile, String state)
 	{
 		super(name, price, quantity, weight);
 	    this.fragile = fragile;
@@ -13,7 +13,12 @@ public class Electronics extends Item
     double calculatePrice () 
 	{
 		// Sales Tax
-        double tax_cost = this.price * (.1); // 10% tax
+        double tax_cost;
+        if(EXSTATES.contains(state)){
+            tax_cost = 0;
+        } else{
+            tax_cost = this.price * (.1); // 10% tax
+        }
                 
         // Shipping cost 
         double shipping_cost = (20*(this.weight)); 
@@ -36,8 +41,9 @@ public class Electronics extends Item
         String output_quantity = "Quantity: " + this.quantity + "\n";;
         String output_weight = "Weight: " + (this.weight*this.quantity) + "\n";
         String output_shipping = "Shipping: "; 
-        if(fragile) output_shipping += ("Fragile" + "\n");
-        else output_shipping += ("Non-fragile" + "\n");
+        if(fragile) output_shipping += ("Fragile");
+        else output_shipping += ("Non-fragile");
+        output_name += " (" + state + ")\n";
         
 		//Print all applicable attributes of this class
         System.out.println(output_name + output_price + output_quantity + output_weight + output_shipping);
