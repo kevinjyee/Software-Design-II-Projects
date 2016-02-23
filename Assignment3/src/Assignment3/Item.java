@@ -38,7 +38,7 @@ public class Item implements Comparable<Item>
         String output_name = "Item: " + this.name + "\n";
         String output_price = "Price: $" + String.format("%1$,.2f", this.price) + "\n";
         String output_quantity = "Quantity: " + this.quantity + "\n";;
-        String output_weight = "Weight: " + (this.weight*this.quantity) + "\n";
+        String output_weight = "Weight: " + (this.weight*this.quantity);
         
 		//Print all applicable attributes of this class
         System.out.println(output_name + output_price + output_quantity + output_weight);

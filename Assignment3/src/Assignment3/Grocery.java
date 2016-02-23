@@ -42,8 +42,8 @@ public class Grocery extends Item {
         String output_quantity = "Quantity: " + this.quantity + "\n";;
         String output_weight = "Weight: " + (this.weight*this.quantity) + "\n";
         String output_shipping = "Shipping: "; 
-        if(perishable) output_shipping += ("Perishable" + "\n");
-        else output_shipping += ("Non-perishable" + "\n");
+        if(perishable) output_shipping += ("Perishable");
+        else output_shipping += ("Non-perishable");
         
 		//Print all applicable attributes of this class
         System.out.println(output_name + output_price + output_quantity + output_weight + output_shipping);

@@ -53,7 +53,7 @@ public class Electronics extends Item
         String output_shipping = "Shipping: "; 
         if(fragile) output_shipping += ("Fragile");
         else output_shipping += ("Non-fragile");
-        output_name += " (" + state + ")\n";
+        output_name += " (" + state + ")";
         
 		//Print all applicable attributes of this class
         System.out.println(output_name + output_price + output_quantity + output_weight + output_shipping);

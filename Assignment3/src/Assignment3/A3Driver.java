@@ -66,23 +66,6 @@ public class A3Driver
 			System.exit(-1);
 		}
 		processLinesInFile (args[0]);
-		
-		//Parse input, take appropriate actions.
-		
-		//Stub for arraylist.
-
-/*		// General code example for how to iterate an array list. You will have to modify this heavily, to suit your needs.
-		Iterator<Item> i = shoppingCart.iterator();
-		while (i.hasNext())
-		{
-			Item temp = i.next();
-			temp.calculatePrice();
-			temp.printItemAttributes();
-			//This (above) works because of polymorphism: a determination is made at runtime,
-			//based on the inherited class type, as to which method is to be invoked. Eg: If it is an instance
-			// of Grocery, it will invoke
-			//the calculatePrice () method defined in Grocery.
-		}		*/
 	  }
 
 	 public static String processCommands(String input) throws Exception{
@@ -99,11 +82,10 @@ public class A3Driver
 			} else if (commands[0].equalsIgnoreCase("update")) {
 				return processUpdate(commands);
 			} else if (commands[0].equalsIgnoreCase("print")) {
-				processPrint(commands);
+				return processPrint(commands);
 			} else {
 				return "Invalid Input: Command";
 			}
-		return "";
 	  }
 	 
 	 public static String processInsert(String[] input) throws Exception
@@ -277,19 +259,26 @@ public class A3Driver
 		 }
 	 }
 
-	// WRONG
 	 public static String processPrint(String[] input)
 	 {
 		 if(input.length != 1){
 			 return "Invalid Input";
 		 }
 		 Collections.sort(shoppingCart);
-		 
-		 for(int i =0; i < shoppingCart.size(); i++){
-			 shoppingCart.get(i).printItemAttributes();
-		 }
-		 return "";
-	
+
+		// General code example for how to iterate an array list. You will have to modify this heavily, to suit your needs.
+		System.out.println();
+		double totalShoppingCartCost = 0;
+		Iterator<Item> i = shoppingCart.iterator();
+		while (i.hasNext())
+		{
+			Item temp = i.next();
+			double tempPrice = temp.calculatePrice();
+			temp.printItemAttributes();
+			System.out.println("Total Cost: " + String.format("%1$,.2f", tempPrice) + "\n");
+			totalShoppingCartCost += tempPrice;
+		}
+		return "Total Cost of Shopping Cart: " + String.format("%1$,.2f", totalShoppingCartCost);
 	 }
 
 	 public static int findName(String name, int startInd, int endInd){
