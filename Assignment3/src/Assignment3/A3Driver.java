@@ -275,10 +275,10 @@ public class A3Driver
 			Item temp = i.next();
 			double tempPrice = temp.calculatePrice();
 			temp.printItemAttributes();
-			System.out.println("Total Cost: " + String.format("%1$,.2f", tempPrice) + "\n");
+			System.out.println("Total Cost: $" + String.format("%1$,.2f", tempPrice) + "\n");
 			totalShoppingCartCost += tempPrice;
 		}
-		return "Total Cost of Shopping Cart: " + String.format("%1$,.2f", totalShoppingCartCost);
+		return "Total Cost of Shopping Cart: $" + String.format("%1$,.2f", totalShoppingCartCost);
 	 }
 
 	 public static int findName(String name, int startInd, int endInd){

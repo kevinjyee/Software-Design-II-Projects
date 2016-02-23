@@ -18,6 +18,7 @@ public class Electronics extends Item
 	{
 		super(name, price, quantity, weight);
 	    this.fragile = fragile;
+        this.state = state.toLowerCase();
     }
     
     double calculatePrice () 
@@ -53,7 +54,7 @@ public class Electronics extends Item
         String output_shipping = "Shipping: "; 
         if(fragile) output_shipping += ("Fragile");
         else output_shipping += ("Non-fragile");
-        output_name += " (" + state + ")";
+        output_shipping += " (" + state.toUpperCase() + ")";
         
 		//Print all applicable attributes of this class
         System.out.println(output_name + output_price + output_quantity + output_weight + output_shipping);

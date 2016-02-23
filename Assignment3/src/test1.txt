@@ -4,21 +4,25 @@ insert Groceries ham 2 3 1 P
 inesert Gridc ham 2 3 4 NP
 insert Electronics
 insert electronics PS3 300 1 5.2 F NM
-insert electronics XBOX 250 1 6.2 F TX
+insert electronics PS3 300 1 5 F OK
+insert electronics XBOX 250 1 6 F TX
+insert electronics COMP 120 10 4 NF NH
 insert Clothing 
 insert clothing shirt 1 1 .1 
-insert clothing shirt 999999999999999999999999999999998484848484848484282821883243421437891873480174301897430819740893172489073189347019823740198274098174308971409837103489710892740189724098317203498710982473091874230981732409871320874083197348097103289743018397240981270349871308934710983471089732408917204389712318903748903127487310284971241329999999999999999999 1 1
+insert clothing shirt 10 1 1
+insert CLOthing shirt 1 1 1
 
 update steak 20
 update ham 0
 update ham 10
 update ham -10
-update ham 0
+update ham 10
 
 delete PS3
 delete PS3 
 delete me
 
+search ham
 search me
 search shirt
 search XBOX
