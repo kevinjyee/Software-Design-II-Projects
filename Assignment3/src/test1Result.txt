@@ -5,8 +5,11 @@ Invalid Input: Command
 Invalid Input: Number of Arguments
 Invalid Input: Weight 
 Added PS3 to cart
+Invalid Input: State
+Added PS3 to cart
 Added XBOX to cart
 Added COMP to cart
+Invalid Input: Fragile
 Invalid Input: Number of Arguments
 Invalid Input: Weight 
 Added shirt to cart
@@ -17,10 +20,15 @@ Updated quantity of ham to 0
 Updated quantity of ham to 10
 Invalid Input: Negative Value
 Updated quantity of ham to 10
+Invalid Input: Number of Arguments
+Updated quantity of PS3 to 20
 Invalid Input: Command
-Deleted PS3. Amount: 1
+Deleted PS3. Amount: 21
 Item Not Found
 Item Not Found
+Item Not Found
+Invalid Input: Number of Arguments
+Invalid Input: Command
 Invalid Input: Command
 Search found ham. Amount: 13
 Item Not Found
@@ -28,6 +36,8 @@ Search found shirt. Amount: 2
 Search found XBOX. Amount: 1
 Search found steak. Amount: 20
 Item Not Found
+Item Not Found
+Search found COMP. Amount: 10
 Invalid Input: Command
 
 Item: COMP

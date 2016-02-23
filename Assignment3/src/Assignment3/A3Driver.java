@@ -226,7 +226,6 @@ public class A3Driver
 				 numDeleted += shoppingCart.get(ind).getQuantity();
 				 shoppingCart.remove(ind);
 				 noneDeleted = false;
-				 ind++;
 			 }
 		 } while(ind != -1);
 
