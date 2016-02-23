@@ -20,9 +20,10 @@ public class ShoppingCartDriver
 	* Purpose: Opens the file specified in String filename, reads each line in it *
 	*          Invokes translate () on each line in the file, and prints out the  *
 	*          translated piglatin string.                                        *
-	* Returns: None                                                               *
+	* Returns: None                                                               
+ * @throws Exception *
 	******************************************************************************/
-	public static void processLinesInFile (String filename) 
+	public static void processLinesInFile (String filename) throws Exception 
 	{ 
 
 		
@@ -35,7 +36,7 @@ public class ShoppingCartDriver
 			for (String s = reader.readLine(); s != null; s = reader.readLine()) 
 			{
 				String output = driver.processCommands(s);
-				
+				System.out.println(output);
 			}
 		} 
 		catch (FileNotFoundException e) 
@@ -60,7 +61,7 @@ public class ShoppingCartDriver
 	 public static ArrayList<String > ALL_STATES = new ArrayList(Arrays.asList(STATES));
 	 public static ArrayList<String> EXCEPTION_STATES = new ArrayList(Arrays.asList(EXSTATES));
 	  
-	  public static void main(String[] args) 
+	  public static void main(String[] args) throws Exception 
 	  {
 		
 		
@@ -90,33 +91,33 @@ public class ShoppingCartDriver
 		}		
 	  }
 
-	 public static String processCommands(String input){
+	 public static String processCommands(String input) throws Exception{
 		  
 		 String commands[] = input.toLowerCase().split("\\s+");
-		 if(commands.length > 8){System.out.println("Invalid Number of Arguments");}
+		 if(commands.length > 8){return "Invalid Number of Arguments";}
+		 
 		 
 		 if (commands[0].equals("insert")) {
-				processInsert(commands);
+				return processInsert(commands);
 			} else if (commands[0].equals("search")) {
-				processSearch(commands);
+				return processSearch(commands);
 			} else if (commands[0].equals("delete")) {
-				processDelete(commands);
+				return processDelete(commands);
 			} else if (commands[0].equals("update")) {
-				processUpdate(commands);
+				return processUpdate(commands);
 			} else if (commands[0].equals("print")) {
 				processPrint(commands);
 			} else {
-				System.out.println("Invalid Argument");
+				return "Invalid Input"; 
 				
 			}
-		 return "";
+		return "";
 	  }
 	 
-	 public static String processInsert(String[] input)
+	 public static String processInsert(String[] input) throws Exception
 	 {
 		 if(input.length > 8){
-			 System.out.println("Invalid Input");
-			 return "";
+			return "Invalid Input";
 		 }
 		 
 		 String type = input[1];
@@ -128,8 +129,7 @@ public class ShoppingCartDriver
 		 if(type.equals("groceries"))
 		 {
 			 if(input.length != 7){
-				 System.out.println("Invalid Input");
-				 return "";
+				 return "Invalid Input";
 			 }
 			 
 			 boolean perishable;
@@ -144,18 +144,16 @@ public class ShoppingCartDriver
 			 }
 			 else
 			 {
-				 System.out.println("Invalid Input");
-				 return "";
+				 return "Invalid Input";
 			 }
 			 Grocery newGrocery = new Grocery(name, price, quantity,weight,perishable);
 			 shoppingCart.add(newGrocery);
 		 }
 		 
-		 if(type.toLowerCase().equals("clothings"))
+		 if(type.equals("clothings"))
 		 {
 			 if(input.length != 6){
-				 System.out.println("Invalid Input");
-				 return "";
+				 return "Invalid Input";
 			 }
 			 
 			 Clothing newClothing = new Clothing(name, price, quantity,weight);
@@ -163,12 +161,11 @@ public class ShoppingCartDriver
 		 } 
 		 
 		 
-		 if(type.toLowerCase().equals("electronics"))
+		 if(type.equals("electronics"))
 		 {
 			 if(input.length != 8)
 			 {
-				 System.out.println("Invalid Input");
-				 return "";
+				 return "Invalid Input";
 			 }
 			 
 			
@@ -186,20 +183,18 @@ public class ShoppingCartDriver
 				 fragile = false;
 			 }
 			 else{
-				 System.out.println("Invalid Input");
-				 return "";
+				 return "Invalid Input";
 			 }
 			 
 			 if(!ALL_STATES.contains(state)){
-				 System.out.println("Invalid Input");
-				 return "";
+				 return "Invalid Input";
 			 }
 			 
 			 Electronics newElectronics = new Electronics(name, price, quantity,weight,fragile,state);
 			 shoppingCart.add(newElectronics); 
 					 
 		 }
-		 return "";
+		 return "Added " + name+ " to cart";
 	 }
 	 
 	 public static String processSearch(String[] input)
@@ -212,14 +207,14 @@ public class ShoppingCartDriver
 		 
 		 int index = findName(name);
 		 
-		 if(index != 1){
-			 System.out.println(String.format("Updated quantity of %s to %d", name, shoppingCart.get(index).getQuantity()));
+		 if(index != -1){
+			 return String.format("There are %s of %d", name, shoppingCart.get(index).getQuantity());
 		 }
 		 else{
-			 System.out.println("Item Not Found");
+			return "Item Not Found";
 		 }
 		 
-		 return "";
+		
 	 }
 	 
 	 public static String processDelete(String[] input)
@@ -233,7 +228,7 @@ public class ShoppingCartDriver
 		 
 		 int index = findName(name);
 		 
-		 if(index != 1){
+		 if(index != -1){
 			 System.out.println(String.format("Deleted quantity of %s to %d", name, shoppingCart.get(index).getQuantity()));
 			 shoppingCart.remove(index);
 		 }
@@ -247,16 +242,16 @@ public class ShoppingCartDriver
 	 public static String processUpdate(String[] input)
 	 { 
 		 if(input.length != 3){
-			 System.out.println("Invalid Input");
-			 return "";
+			return "Invalid Input";
 		 }
 		 String name = input[1];
 		 int quantity = Integer.parseInt(input[2]);
 		 
 		 int index = findName(name);
 		 
-		 if(index != 1){
+		 if(index != -1){
 			 shoppingCart.get(index).setQuantity(quantity);
+			 return String.format("Updated quantity of %s to %d", name, shoppingCart.get(index).getQuantity());
 		 }
 		 else{
 			 System.out.println("Item Not Found");
@@ -267,20 +262,32 @@ public class ShoppingCartDriver
 
 	 public static String processPrint(String[] input)
 	 {
-		return "";
+		 if(input.length != 1){
+			 System.out.println("Invalid Input");
+			 return "";
+		 }
+		 Collections.sort(shoppingCart);
+		 
+		 for(int i =0; i < shoppingCart.size(); i++){
+			 shoppingCart.get(i).printItemAttributes();
+		 }
+		 return "";
+	
 	 }
+	 
 	 
 	 public static int findName(String name){
 		 int ind = -1;
+		 if(shoppingCart.size() == 0){return ind;}
 		 for(ind = 0; ind < shoppingCart.size(); ind++){
-			 if(shoppingCart.get(ind).getName() == name){
-				 
-				break;
+			 if(shoppingCart.get(ind).getName().equals(name)){
+				return ind; 
+				
 			 }
 		 }
 		 
 	 
-	 return ind;
+	 return -1;
 	}
 	 
 	}
@@ -288,6 +295,5 @@ public class ShoppingCartDriver
 
 	
 	
-
 
 

@@ -13,11 +13,7 @@ public class Electronics extends Item
 	 
 	 
     protected boolean fragile; 
-<<<<<<< HEAD
     protected String state;
-=======
-    
->>>>>>> 58135eb1fca000355501033e9876c4f739594b32
 	public Electronics(String name, double price, int quantity, int weight, boolean fragile, String state)
 	{
 		super(name, price, quantity, weight);
@@ -28,11 +24,7 @@ public class Electronics extends Item
 	{
 		// Sales Tax
         double tax_cost;
-<<<<<<< HEAD
         if(EXCEPTION_STATES.contains(state)){
-=======
-        if(EXSTATES.contains(state)){
->>>>>>> 58135eb1fca000355501033e9876c4f739594b32
             tax_cost = 0;
         } else{
             tax_cost = this.price * (.1); // 10% tax
