@@ -87,21 +87,21 @@ public class A3Driver
 
 	 public static String processCommands(String input) throws Exception{
 		  
-		 String commands[] = input.toLowerCase().split("\\s+");
-		 if(commands.length > 8 || commands.length <= 0){return "Invalid Number of Arguments";}
+		 String commands[] = input.split("\\s+");
+		 if(commands.length > 8 || commands.length <= 0){return "Invalid Input: Number of Arguments";}
 		 
-		 if (commands[0].equals("insert")) {
+		 if (commands[0].equalsIgnoreCase("insert")) {
 				return processInsert(commands);
-			} else if (commands[0].equals("search")) {
+			} else if (commands[0].equalsIgnoreCase("search")) {
 				return processSearch(commands);
-			} else if (commands[0].equals("delete")) {
+			} else if (commands[0].equalsIgnoreCase("delete")) {
 				return processDelete(commands);
-			} else if (commands[0].equals("update")) {
+			} else if (commands[0].equalsIgnoreCase("update")) {
 				return processUpdate(commands);
-			} else if (commands[0].equals("print")) {
+			} else if (commands[0].equalsIgnoreCase("print")) {
 				processPrint(commands);
 			} else {
-				return "Invalid Input";
+				return "Invalid Input: Command";
 			}
 		return "";
 	  }
@@ -109,85 +109,91 @@ public class A3Driver
 	 public static String processInsert(String[] input) throws Exception
 	 {
 		 if(input.length > 8 || input.length < 6){
-			return "Invalid Input";
+			return "Invalid Input: Number of Arguments";
 		 }
 		 
 		 String type = input[1];
 		 String name = input[2];
 		 if(!input[3].matches(regDOUBLE)){return "ERROR: Please enter amount in 0.00 format";}
-		 double price = Double.parseDouble(input[3]);
+		 double price;
+		 try {
+			 price = Double.parseDouble(input[3]);
+		 }
+		 catch(NumberFormatException e) {
+			 return "Invalid Input: Price";
+		 }
 		 int quantity;
-		 int weight;
 		 try{
-		  quantity = Integer.parseInt(input[4]);
+			 quantity = Integer.parseInt(input[4]);
 		 }
 		 catch(NumberFormatException e){
-			 return "Invalid Input";
+			 return "Invalid Input: Quantity";
 		 }
-		 
+		 int weight;
 		 try{
 			 weight = Integer.parseInt(input[5]);
 		 }
 		 catch(NumberFormatException e){
 			 return "Invalid Input: Weight ";
 		 }
-		 if(weight < 0 || quantity < 0 || price < 0){return "Invalid Input";}
+		 if(weight < 0 || quantity < 0 || price < 0){return "Invalid Input: Negative Value";}
 		 
-		 if(type.equals("groceries"))
+		 if(type.equalsIgnoreCase("groceries"))
 		 {
 			 if(input.length != 7){
-				 return "Invalid Input";
+				 return "Invalid Input: Number of Arguments";
 			 }
 			 
 			 boolean perishable;
 			
-			 if(input[6].equals("p"))
+			 if(input[6].equalsIgnoreCase("p"))
 			 {
 				 perishable = true;
 			 }
-			 else if(input[6].equals("np"))
+			 else if(input[6].equalsIgnoreCase("np"))
 			 {
 				 perishable = false;
 			 }
 			 else
 			 {
-				 return "Invalid Input";
+				 return "Invalid Input: Perishable";
 			 }
 			 Grocery newGrocery = new Grocery(name, price, quantity,weight,perishable);
 			 shoppingCart.add(newGrocery);
 		 }
-		 if(type.equals("clothing"))
+		 if(type.equalsIgnoreCase("clothing"))
 		 {
 			 if(input.length != 6){
-				 return "Invalid Input";
+				 return "Invalid Input: Number of Arguments";
 			 }
-			 Clothing newClothing = new Clothing(name, price, quantity,weight);
+			 Clothing newClothing = new Clothing(name, price, quantity, weight);
 			 shoppingCart.add(newClothing);
 		 } 
 		 
-		 if(type.equals("electronics"))
+		 if(type.equalsIgnoreCase("electronics"))
 		 {
 			 if(input.length != 8)
 			 {
-				 return "Invalid Input";
+				 return "Invalid Input: Number of Arguments";
 			 }
 			 String breakable = input[6];
 			 String state = input[7];
 			 boolean fragile;
 			 
-			 if(breakable.equals("f")){
+			 if(breakable.equalsIgnoreCase("f"))
+			 {
 				 fragile = true;
 			 }
-			 else if(breakable.equals("nf"))
+			 else if(breakable.equalsIgnoreCase("nf"))
 			 {
 				 fragile = false;
 			 }
 			 else{
-				 return "Invalid Input";
+				 return "Invalid Input: Fragile";
 			 }
 			 
-			 if(!ALL_STATES.contains(state)){
-				 return "Invalid Input";
+			 if(!ALL_STATES.contains(state.toLowerCase())){
+				 return "Invalid Input: State";
 			 }
 			 Electronics newElectronics = new Electronics(name, price, quantity,weight,fragile,state);
 			 shoppingCart.add(newElectronics); 
@@ -198,8 +204,7 @@ public class A3Driver
 	 public static String processSearch(String[] input)
 	 {
 		 if(input.length != 2){
-			 System.out.println("Invalid Input");
-			 return "";
+			 return "Invalid Input: Number of Arguments";
 		 }
 		 String name = input[1];
 
@@ -226,8 +231,7 @@ public class A3Driver
 	 public static String processDelete(String[] input)
 	 {
 		 if(input.length != 2){
-			 System.out.println("Invalid Input");
-			 return "";
+			 return "Invalid Input: Number of Arguments";
 		 }
 		 String name = input[1];
 
@@ -245,23 +249,23 @@ public class A3Driver
 		 } while(ind != -1);
 
 		 if(!noneDeleted){
-			 System.out.println(String.format("Deleted %s. Amount: %d", name, numDeleted));
+			 return String.format("Deleted %s. Amount: %d", name, numDeleted);
 		 }
 		 else{
-			 System.out.println("Item Not Found");
+			 return "Item Not Found";
 		 }
-		 
-		 return "";
 	 }
  
 	 public static String processUpdate(String[] input)
 	 { 
 		 if(input.length != 3){
-			return "Invalid Input";
+			return "Invalid Input: Number of Arguments";
 		 }
 		 String name = input[1];
 		 int quantity = Integer.parseInt(input[2]);
-		 
+		 if(quantity < 0){return "Invalid Input: Negative Value";}
+
+
 		 int index = findName(name, 0, shoppingCart.size());
 		 
 		 if(index != -1){
@@ -269,17 +273,15 @@ public class A3Driver
 			 return String.format("Updated quantity of %s to %d", name, shoppingCart.get(index).getQuantity());
 		 }
 		 else{
-			 System.out.println("Item Not Found");
+			 return "Item Not Found";
 		 }
-		 
-		 return "";
 	 }
 
+	// WRONG
 	 public static String processPrint(String[] input)
 	 {
 		 if(input.length != 1){
-			 System.out.println("Invalid Input");
-			 return "";
+			 return "Invalid Input";
 		 }
 		 Collections.sort(shoppingCart);
 		 
