@@ -54,13 +54,13 @@ public class ShoppingCartDriver
 	}
 	
 	
-	  public static ArrayList<Item> shoppingCart = new ArrayList<Item>(); 
-	  
+	 public static ArrayList<Item> shoppingCart = new ArrayList<Item>(); 
 	 public static String[] STATES = new String[] {"al", "ak", "as", "az", "ar", "ca", "co", "ct", "de", "dc", "fm", "fl", "ga", "gu", "hi", "id", "il", "in", "ia", "ks", "ky", "la", "me", "mh", "md", "ma", "mi", "mn", "ms", "mo", "mt", "ne", "nv", "nh", "nj", "nm", "ny", "nc", "nd", "mp", "oh", "ok", "or", "pw", "pa", "pr", "ri", "sc", "sd", "tn", "tx", "ut", "vt", "vi", "va", "wa", "wv", "wi", "wy"};
 	 public static String[] EXSTATES = new String[] {"tx","nm","va","az","ak"};
 	 public static ArrayList<String > ALL_STATES = new ArrayList(Arrays.asList(STATES));
 	 public static ArrayList<String> EXCEPTION_STATES = new ArrayList(Arrays.asList(EXSTATES));
-	  
+	 private static final String regDOUBLE =  "^\\d+(\\.\\d+)?$";
+	 
 	  public static void main(String[] args) throws Exception 
 	  {
 		
@@ -122,9 +122,24 @@ public class ShoppingCartDriver
 		 
 		 String type = input[1];
 		 String name = input[2];
+		 if(!input[3].matches(regDOUBLE)){return "ERROR: Please enter amount in 0.00 format";}
 		 double price = Double.parseDouble(input[3]);
-		 int quantity = Integer.parseInt(input[4]);
-		 int weight = Integer.parseInt(input[5]);
+		int quantity;
+		int weight;
+		 try{
+		  quantity = Integer.parseInt(input[4]);
+		 }
+		 catch(NumberFormatException e){
+			 return "Invalid Input";
+		 }
+		 
+		 try{
+		  weight = Integer.parseInt(input[5]);
+		 }
+		 catch(NumberFormatException e){
+			 return "Invalid Input";
+		 }
+		 if(weight < 0 || quantity < 0 || price < 0){return "Invalid Input";}
 		 
 		 if(type.equals("groceries"))
 		 {
@@ -168,8 +183,6 @@ public class ShoppingCartDriver
 				 return "Invalid Input";
 			 }
 			 
-			
-			 
 			 String breakable = input[6];
 			 String state = input[7];
 			 boolean fragile;
@@ -208,7 +221,7 @@ public class ShoppingCartDriver
 		 int index = findName(name);
 		 
 		 if(index != -1){
-			 return String.format("There are %s of %d", name, shoppingCart.get(index).getQuantity());
+			 return String.format("Search found %s. Amount: %d", name, shoppingCart.get(index).getQuantity());
 		 }
 		 else{
 			return "Item Not Found";
@@ -229,7 +242,7 @@ public class ShoppingCartDriver
 		 int index = findName(name);
 		 
 		 if(index != -1){
-			 System.out.println(String.format("Deleted quantity of %s to %d", name, shoppingCart.get(index).getQuantity()));
+			 System.out.println(String.format("Deleted %s. Amount: %d", name, shoppingCart.get(index).getQuantity()));
 			 shoppingCart.remove(index);
 		 }
 		 else{
