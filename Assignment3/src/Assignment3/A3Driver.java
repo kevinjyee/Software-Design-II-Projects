@@ -202,11 +202,21 @@ public class A3Driver
 			 return "";
 		 }
 		 String name = input[1];
-		 
-		 int index = findName(name);
-		 
-		 if(index != -1){
-			 return String.format("Search found %s. Amount: %d", name, shoppingCart.get(index).getQuantity());
+
+		 boolean noneFound = true;
+		 int ind = 0;
+		 int numFound = 0;
+		 do{
+			 ind = findName(name, ind, shoppingCart.size());
+			 if(ind != -1){
+				 numFound += shoppingCart.get(ind).getQuantity();
+				 noneFound = false;
+				 ind++;
+			 }
+		 } while(ind != -1);
+
+		 if(!noneFound){
+			 return String.format("Search found %s. Amount: %d", name, numFound);
 		 }
 		 else{
 			return "Item Not Found";
@@ -220,12 +230,22 @@ public class A3Driver
 			 return "";
 		 }
 		 String name = input[1];
-		 
-		 int index = findName(name);
-		 
-		 if(index != -1){
-			 System.out.println(String.format("Deleted %s. Amount: %d", name, shoppingCart.get(index).getQuantity()));
-			 shoppingCart.remove(index);
+
+         boolean noneDeleted = true;
+		 int ind = 0;
+		 int numDeleted = 0;
+		 do{
+			 ind = findName(name, ind, shoppingCart.size());
+			 if(ind != -1){
+				 numDeleted += shoppingCart.get(ind).getQuantity();
+				 shoppingCart.remove(ind);
+				 noneDeleted = false;
+				 ind++;
+			 }
+		 } while(ind != -1);
+
+		 if(!noneDeleted){
+			 System.out.println(String.format("Deleted %s. Amount: %d", name, numDeleted));
 		 }
 		 else{
 			 System.out.println("Item Not Found");
@@ -242,7 +262,7 @@ public class A3Driver
 		 String name = input[1];
 		 int quantity = Integer.parseInt(input[2]);
 		 
-		 int index = findName(name);
+		 int index = findName(name, 0, shoppingCart.size());
 		 
 		 if(index != -1){
 			 shoppingCart.get(index).setQuantity(quantity);
@@ -269,11 +289,11 @@ public class A3Driver
 		 return "";
 	
 	 }
-	 
-	 public static int findName(String name){
+
+	 public static int findName(String name, int startInd, int endInd){
 		 int ind = -1;
-		 if(shoppingCart.size() == 0){return ind;}
-		 for(ind = 0; ind < shoppingCart.size(); ind++){
+		 if(endInd - startInd <= 0){return ind;}
+		 for(ind = startInd; ind < endInd; ind++){
 			 if(shoppingCart.get(ind).getName().equals(name)){
 				return ind;
 			 }
@@ -281,9 +301,4 @@ public class A3Driver
         return -1;
 	}	 
 }
-
-
-	
-	
-
 

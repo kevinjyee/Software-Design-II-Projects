@@ -7,10 +7,6 @@ public class Item implements Comparable<Item>
 	protected double price;
 	protected int quantity;
 	protected int weight;
-	
-
-	
-	
 
     public Item(String name, double price, int quantity, int weight)
 	{
