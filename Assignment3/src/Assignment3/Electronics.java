@@ -24,7 +24,7 @@ public class Electronics extends Item
     
 // Constructors    
     /**
-     * Create an electronics item with a name, price, initial quantity, and weight
+     * Create an electronics item with a name, price, initial quantity, weight, fragility, and state
      * @param name     The name of the electronics
      * @param price    The price of the electronics
      * @param quantity The initial quantity of the electronics 
@@ -39,9 +39,11 @@ public class Electronics extends Item
         this.state = state.toLowerCase();
     }
     
+// methods for final price and printing
+    
     /**
      * Calculates the final price based on tax rate and shipping 
-     * @return double  The final price of items 
+     * @return double  The final price of electronics 
      */         
     public double calculatePrice () 
     {
@@ -59,7 +61,7 @@ public class Electronics extends Item
             shipping_cost = shipping_cost*(1.20);
         }
         
-        // Final price for the total quantity of item 
+        // Final price for the total quantity of electronics 
         double final_price = quantity * (tax_cost + shipping_cost + price);
         
         return final_price;
