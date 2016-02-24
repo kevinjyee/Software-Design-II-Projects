@@ -1,3 +1,10 @@
+/**
+  Grocery Class
+  Solves EE422C programming assignment #3
+  @author Kevin Yee (ky), Alvin Tung (ayt243)
+  @version 1.00 2016-02-023
+ */
+ 
 package Assignment3;
 
 public class Grocery extends Item {
