@@ -1,0 +1,102 @@
+Added steak to cart
+Added ham to cart
+Added ham to cart
+Invalid Input: Command
+Invalid Input: Number of Arguments
+Invalid Input: Weight 
+Added PS3 to cart
+Invalid Input: State
+Added PS3 to cart
+Added XBOX to cart
+Added COMP to cart
+Invalid Input: Fragile
+Invalid Input: Number of Arguments
+Invalid Input: Weight 
+Added shirt to cart
+Added shirt to cart
+ERROR: Please enter amount in 0.00 format
+Invalid Input: Negative Value
+Invalid Input: Negative Value
+Invalid Input: Command
+Updated quantity of steak to 20
+Updated quantity of ham to 0
+Updated quantity of ham to 10
+Invalid Input: Negative Value
+Updated quantity of ham to 10
+Invalid Input: Number of Arguments
+Updated quantity of PS3 to 20
+Invalid Input: Command
+Deleted PS3. Amount: 2
+Item Not Found
+Item Not Found
+Item Not Found
+Invalid Input: Number of Arguments
+Invalid Input: Command
+Invalid Input: Command
+Search found ham. Amount: 2
+Item Not Found
+Search found shirt. Amount: 2
+Search found XBOX. Amount: 1
+Search found steak. Amount: 1
+Item Not Found
+Item Not Found
+Search found COMP. Amount: 1
+Invalid Input: Command
+
+Name: COMP
+Item Type: Electronics
+Price: $120.00
+Quantity: 10
+Weight: 4
+Shipping: Non-fragile (NH)
+Total Cost: $2,120.00
+
+Name: XBOX
+Item Type: Electronics
+Price: $250.00
+Quantity: 1
+Weight: 6
+Shipping: Fragile (TX)
+Total Cost: $394.00
+
+Name: ham
+Item Type: Grocery
+Price: $2.00
+Quantity: 10
+Weight: 1
+Shipping: Non-perishable
+Total Cost: $220.00
+
+Name: ham
+Item Type: Grocery
+Price: $2.00
+Quantity: 3
+Weight: 1
+Shipping: Perishable
+Total Cost: $78.00
+
+Name: shirt
+Item Type: Clothing
+Price: $10.00
+Quantity: 1
+Weight: 1
+Shipping: Standard
+Total Cost: $31.00
+
+Name: shirt
+Item Type: Clothing
+Price: $1.00
+Quantity: 1
+Weight: 1
+Shipping: Standard
+Total Cost: $21.10
+
+Name: steak
+Item Type: Grocery
+Price: $10.00
+Quantity: 20
+Weight: 5
+Shipping: Perishable
+Total Cost: $2,600.00
+
+Total Cost of Shopping Cart: $5,464.10
